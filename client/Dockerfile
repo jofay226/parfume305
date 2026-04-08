@@ -1,8 +1,8 @@
-FROM  ----------
+FROM  node:18-alpine
 
 WORKDIR /client
 
-COPY package.json . 
+COPY package*.json . 
 
 RUN npm install 
 
