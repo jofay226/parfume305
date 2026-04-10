@@ -17,21 +17,16 @@ const typeDefs = `
     title: String
     author: String
   }
-
-
   type Query {
     books: [Book]
   }
 `;
-
-
 
 const resolvers = {
   Query: {
     books: () => books,
   },
 };
-
 
 const server = new ApolloServer({
   typeDefs,
