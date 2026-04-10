@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Brand {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  perfume   Perfume[]
+  createdAt DateTime  @default(now())
+}
+
+model Perfume {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  brandId     String
+
+  brand Brand @relation(fields: [brandId], references: [id])
+
+  variants Variant[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Variant {
+  id
+  size
+  concentrate
+  price
+}
