@@ -16,22 +16,24 @@ model Brand {
 }
 
 model Perfume {
-  id          String @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
   description String
   brandId     String
-
-  brand Brand @relation(fields: [brandId], references: [id])
-
-  variants Variant[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  brand       Brand     @relation(fields: [brandId], references: [id])
+  variants    Variant[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Variant {
-  id
-  size
-  concentrate
-  price
+  id          String   @default(uuid())
+  size        Int
+  concentrate String
+  price       Int
+  perfumeId   String
+  perfume     Perfume  @relation(fields: [perfumeId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@unique([perfumeId, size, concentrate])
 }

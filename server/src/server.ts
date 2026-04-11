@@ -33,6 +33,8 @@ const server = new ApolloServer({
   resolvers,
 });
 
+console.log(process.env.DATABASE_URL);
+
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },

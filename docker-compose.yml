@@ -20,6 +20,7 @@ services:
     environment:
       CHOKIDAR_USEPOLLING: true
       PORT: 4000
+      DATABASE_URL: ${DATABASE_URL}
     depends_on:
       - db
     ports:
@@ -31,7 +32,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty123
-      POSTGRES_DB: parfume
+      POSTGRES_DB: perfume
     ports:
       - "5433:5432"
     volumes:
