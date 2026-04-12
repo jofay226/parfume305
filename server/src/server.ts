@@ -4,16 +4,17 @@ import { brandTypeDefs } from './graphql/typedefs/brand.typedef.ts';
 import { brandResolvers } from './graphql/resolvers/brand.resolver.ts';
 
 
-
 const typeDefs = `
   type Query 
   type Mutation
   ${brandTypeDefs}
 `;
 
+
+
 const resolvers = {
-  // Query: {
-  // },
+  Query: {
+  },
   Mutation: {
     ...brandResolvers.Mutation
   }
