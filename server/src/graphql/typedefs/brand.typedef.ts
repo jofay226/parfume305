@@ -1,4 +1,4 @@
-export const typeDefs = `
+export const brandTypeDefs = `
   input CreateBrandInput {
     name: String!
   }
@@ -10,5 +10,9 @@ export const typeDefs = `
 
   extend type Mutation {
     createBrand(param: CreateBrandInput): Brand 
+  }
+
+  extend type Query {
+    test: String
   }
 `;

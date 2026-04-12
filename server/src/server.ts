@@ -1,21 +1,22 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import { brandTypeDefs } from './graphql/typedefs/brand.typedef.ts';
+import { brandResolvers } from './graphql/resolvers/brand.resolver.ts';
 
 
 
 const typeDefs = `
-  type Book {
-    title: String
-    author: String
-  }
-  type Query {
-    books: [Book]
-  }
+  type Query 
+  type Mutation
+  ${brandTypeDefs}
 `;
 
 const resolvers = {
-  Query: {
-  },
+  // Query: {
+  // },
+  Mutation: {
+    ...brandResolvers.Mutation
+  }
 };
 
 const server = new ApolloServer({
@@ -23,7 +24,7 @@ const server = new ApolloServer({
   resolvers,
 });
 
-console.log(process.env.DATABASE_URL);
+
 
 
 const { url } = await startStandaloneServer(server, {
