@@ -8,6 +8,10 @@ export const brandService = {
             }
         })
         return newBrand
+    },
+    getAllBrands: async () => {
+        const brands = await prisma.brand.findMany({})
+        return brands
     }
 } 
 

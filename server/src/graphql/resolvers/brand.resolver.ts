@@ -7,5 +7,11 @@ export const brandResolvers = {
         return newBrand
     }
   },
+  Query: {
+    getAllBrands: () => {
+      const brands = brandService.getAllBrands()
+      return brands
+    }
+  }
 };
 

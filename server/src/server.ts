@@ -14,6 +14,7 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
+    ...brandResolvers.Query
   },
   Mutation: {
     ...brandResolvers.Mutation

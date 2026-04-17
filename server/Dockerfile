@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 4000
 
-CMD [ "npm", "run", "dev" ]
+CMD sh -c "sleep 5 && npx prisma migrate dev --name init && npm run dev"
