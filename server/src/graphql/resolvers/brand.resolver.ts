@@ -5,13 +5,19 @@ export const brandResolvers = {
     createBrand : (_, {param}: { param: {name: string}}) => {
         const newBrand =  brandService.createBrand(param.name)
         return newBrand
+    },
+    deleteBrand:  (_, {param}) => { 
+        const deletedBrand = brandService.deleteBrand(param.id)
+        return deletedBrand
     }
   },
   Query: {
     getAllBrands: () => {
       const brands = brandService.getAllBrands()
       return brands
-    }
+    },
+    // getSingleBrand
+
   }
 };
 
