@@ -1,21 +1,22 @@
-const PerfumeTypeDefs = `#graphql
+export const perfumeTypeDefs = `#graphql
   
-  type Variant {
-    size 
-    concentrate
-    price
+  input Variant {
+    size: Int
+    concentrate: String
+    price: Int
   }
 
   input CraetePerfumeInput {
-    name 
-    description
-    brandId
+    name: String
+    description: String
+    brandId: String
     variants: [Variant]
   }
 
   type Pefume {
     id: ID!
     name: String
+    description: String
   }
 
   type Query {
@@ -23,6 +24,6 @@ const PerfumeTypeDefs = `#graphql
   }
 
   type Mutation {
-    createPerfume(param: ): Perfume
+    createPerfume(params: CraetePerfumeInput): Pefume
   }
 `;
