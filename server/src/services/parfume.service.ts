@@ -18,6 +18,14 @@ export const perfumeService = {
         })
 
         return newPerfume
+    },
+    getPerfumes: async (filters) => {
+        const perfumes = await prisma.perfume.findMany({
+            where: {
+                ...(filters.brandId && {brandId: filters.brandId})
+            }
+        })
+        return perfumes
     }
 
 } 
