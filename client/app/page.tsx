@@ -35,7 +35,7 @@ const perfumes = [
   },
 ];
 
-const ALL_BRANDS = gql`
+export const ALL_BRANDS = gql`
   query GetAllBrands {
     getAllBrands {
       id
