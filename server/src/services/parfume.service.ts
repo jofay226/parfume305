@@ -22,12 +22,20 @@ export const perfumeService = {
     getPerfumes: async (filters) => {
         const perfumes = await prisma.perfume.findMany({
             where: {
-                ...(filters.brandId && {brandId: filters.brandId})
+                ...(filters.brandId && {brandId: filters.brandId}),
+                variants: {
+                    some : {
+                        ...(filters.size && {size: filters.size}),
+                        ...(filters.concentrate && {concentrate: filters.concentrate}),
+                    }
+                }
+            },
+            include: {
+                variants: true
             }
         })
         return perfumes
     }
-
 } 
 
 
