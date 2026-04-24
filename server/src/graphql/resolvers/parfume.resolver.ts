@@ -2,11 +2,11 @@ import { perfumeService } from "../../services/parfume.service.ts";
 
 export const perfumeResolvers = {
   Query: {
-    getPerfumes :  async (_, args) => {
-      console.log(args);
+    getPerfumes :  async (_, {input}) => {
+  
       
-      // const perfumes = await perfumeService.getPerfumes({})
-      // console.log(perfumes);
+      const perfumes = await perfumeService.getPerfumes(input)
+      console.log(perfumes);
       
       return "hello"
     },
