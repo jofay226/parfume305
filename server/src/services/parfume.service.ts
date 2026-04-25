@@ -25,7 +25,7 @@ export const perfumeService = {
                 ...(filters.brandId && {brandId: filters.brandId}),
                 variants: {
                     some : {
-                        ...(filters.size && {size: filters.size}),
+                        ...(filters.size && {size: filters.size} ),
                         ...(filters.concentrate && {concentrate: filters.concentrate}),
                     }
                 }
