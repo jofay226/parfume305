@@ -40,7 +40,9 @@ function Page() {
   });
 
   const [brand, setBrand] = useState("");
-  const [createBrandMutation] = useMutation(CREATE_BRAND);
+  const [createBrandMutation] = useMutation(CREATE_BRAND, {
+    refetchQueries: [{ query: ALL_BRANDS }],
+  });
   const router = useRouter();
 
   const craeteBrandHandler = () => {
@@ -136,135 +138,137 @@ function Page() {
             </div>
 
             <div className="space-y-5 px-6 py-6">
-            {/* NAME */}
+              {/* NAME */}
 
-            <input
-              onChange={formHandler}
-              name="name"
-              type="text"
-              placeholder="Perfume Name"
-              className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
-            />
+              <input
+                onChange={formHandler}
+                name="name"
+                type="text"
+                placeholder="Perfume Name"
+                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
+              />
 
-            {/* DESCRIPTION */}
+              {/* DESCRIPTION */}
 
-            <textarea
-              onChange={formHandler}
-              name="description"
-              placeholder="Perfume Description"
-              className="h-28 w-full resize-none rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
-            />
+              <textarea
+                onChange={formHandler}
+                name="description"
+                placeholder="Perfume Description"
+                className="h-28 w-full resize-none rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
+              />
 
-            {/* BRAND */}
+              {/* BRAND */}
 
-            <select
-              onClick={formHandler}
-              name="brandId"
-              className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
-            >
-              {brands?.getAllBrands.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
+              <select
+                onClick={formHandler}
+                name="brandId"
+                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
+              >
+                {brands?.getAllBrands.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.name}
+                  </option>
+                ))}
+              </select>
 
-            {/* VARIANTS */}
+              {/* VARIANTS */}
 
-            <div className="rounded-3xl border border-white/10 bg-black/10 p-5">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-100/80">
-                    Variants
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-400">
-                    Configure size, concentration, and price.
-                  </p>
+              <div className="rounded-3xl border border-white/10 bg-black/10 p-5">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-100/80">
+                      Variants
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-400">
+                      Configure size, concentration, and price.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {/* 50 ml */}
+
+                  <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
+                    <input type="checkbox" className="accent-blue-500" />
+
+                    <span className="text-sm font-medium text-gray-200">
+                      50 ml
+                    </span>
+
+                    <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
+                      <option>EDT</option>
+
+                      <option>EDP</option>
+
+                      <option>Parfum</option>
+                    </select>
+
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
+                    />
+                  </div>
+
+                  {/* 100 ml */}
+
+                  <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
+                    <input type="checkbox" className="accent-blue-500" />
+
+                    <span className="text-sm font-medium text-gray-200">
+                      100 ml
+                    </span>
+
+                    <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
+                      <option>EDT</option>
+
+                      <option>EDP</option>
+
+                      <option>Parfum</option>
+                    </select>
+
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
+                    />
+                  </div>
+
+                  {/* 150 ml */}
+
+                  <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
+                    <input type="checkbox" className="accent-blue-500" />
+
+                    <span className="text-sm font-medium text-gray-200">
+                      150 ml
+                    </span>
+
+                    <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
+                      <option>EDT</option>
+
+                      <option>EDP</option>
+
+                      <option>Parfum</option>
+                    </select>
+
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                {/* 50 ml */}
+              {/* BUTTON */}
 
-                <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
-                  <input type="checkbox" className="accent-blue-500" />
-
-                  <span className="text-sm font-medium text-gray-200">50 ml</span>
-
-                  <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
-                    <option>EDT</option>
-
-                    <option>EDP</option>
-
-                    <option>Parfum</option>
-                  </select>
-
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
-                  />
-                </div>
-
-                {/* 100 ml */}
-
-                <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
-                  <input type="checkbox" className="accent-blue-500" />
-
-                  <span className="text-sm font-medium text-gray-200">
-                    100 ml
-                  </span>
-
-                  <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
-                    <option>EDT</option>
-
-                    <option>EDP</option>
-
-                    <option>Parfum</option>
-                  </select>
-
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
-                  />
-                </div>
-
-                {/* 150 ml */}
-
-                <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
-                  <input type="checkbox" className="accent-blue-500" />
-
-                  <span className="text-sm font-medium text-gray-200">
-                    150 ml
-                  </span>
-
-                  <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
-                    <option>EDT</option>
-
-                    <option>EDP</option>
-
-                    <option>Parfum</option>
-                  </select>
-
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
-                  />
-                </div>
-              </div>
+              <button
+                onClick={createPerfumeHandler}
+                className="w-full rounded-2xl bg-gradient-to-r from-amber-300 to-rose-300 p-3.5 font-semibold text-slate-950 transition hover:brightness-105 focus:outline-none focus:ring-4 focus:ring-amber-200/20"
+              >
+                Create Perfume
+              </button>
             </div>
-
-            {/* BUTTON */}
-
-            <button
-              onClick={createPerfumeHandler}
-              className="w-full rounded-2xl bg-gradient-to-r from-amber-300 to-rose-300 p-3.5 font-semibold text-slate-950 transition hover:brightness-105 focus:outline-none focus:ring-4 focus:ring-amber-200/20"
-            >
-              Create Perfume
-            </button>
-          </div>
           </section>
         </div>
       </div>

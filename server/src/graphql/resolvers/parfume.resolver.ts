@@ -4,8 +4,6 @@ export const perfumeResolvers = {
   Query: {
     getPerfumes :  async (_, {input}) => {
       const perfumes = await perfumeService.getPerfumes(input)  
-      console.log(perfumes);
-          
       return perfumes
     },
   },

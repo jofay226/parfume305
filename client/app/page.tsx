@@ -44,11 +44,33 @@ export const ALL_BRANDS = gql`
   }
 `;
 
+const GET_PERFUMES = gql`
+  query GetPerfumes($input: FilterType) {
+    getPerfumes(input: $input) {
+      name
+      description
+      brandId
+      variants {
+        size
+        concentrate
+        price
+      }
+    }
+  }
+`;
+
 export default function Home() {
   const { data, loading } = useQuery(ALL_BRANDS);
-  console.log(loading);
-
-  console.log(data);
+  const { data: perfumesData } = useQuery(GET_PERFUMES, {
+    variables: {
+      input: {
+        size: 50,
+        concentrate: null,
+        brandId: null,
+      },
+    },
+  });
+  console.log(perfumesData);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-neutral-900 text-black dark:text-white p-6 transition-colors">
@@ -113,9 +135,9 @@ export default function Home() {
 
           {/* CARDS */}
           <div className="grid grid-cols-3 gap-6">
-            {perfumes.map((p) => (
+            {perfumesData?.getPerfumes.map((p, i) => (
               <div
-                key={p.id}
+                key={i}
                 className="bg-white dark:bg-neutral-800 rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition"
               >
                 <img
@@ -127,15 +149,15 @@ export default function Home() {
                 <div className="p-4 space-y-2">
                   <h3 className="font-semibold">{p.name}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {p.brand}
+                    {p.brandId}
                   </p>
 
                   <p className="text-xs text-gray-400">
-                    {p.size} • {p.concentration}
+                    {p.variants[0].size}ML • {p.variants[0].concentrate}
                   </p>
 
                   <div className="flex justify-between items-center mt-3">
-                    <span className="font-bold">{p.price}</span>
+                    <span className="font-bold">{p.variants[0].price}$</span>
                     <button className="bg-black dark:bg-white dark:text-black text-white text-xs px-3 py-1 rounded-lg">
                       Buy
                     </button>
