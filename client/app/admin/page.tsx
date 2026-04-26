@@ -78,26 +78,64 @@ function Page() {
   };
 
   return (
-    <div>
-      <div>
-        <label htmlFor="">create brand</label>
-        <input
-          onChange={(e) => setBrand(e.target.value)}
-          type="text"
-          value={brand}
-        />
-        <button
-          onClick={craeteBrandHandler}
-          className="border-2 border-rose-400 p-2"
-        >
-          Create Brand
-        </button>
-      </div>
-      <div className="min-h-screen bg-[#0f1115] flex items-center justify-center p-6 text-gray-200">
-        <section className="w-full max-w-xl bg-[#151922] p-6 rounded-2xl border border-[#262b36] shadow-lg">
-          <h2 className="text-xl font-semibold mb-6">Create Perfume</h2>
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#1b2230_0%,_#0f1115_48%,_#090b0f_100%)] p-6 text-gray-200">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+        <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-[0_20px_70px_rgba(0,0,0,0.45)] backdrop-blur">
+          <div className="border-b border-white/10 bg-gradient-to-r from-amber-400/10 via-transparent to-rose-400/10 px-6 py-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200/80">
+              Admin
+            </p>
+            <h1 className="mt-2 text-2xl font-semibold text-white">
+              Brand Management
+            </h1>
+            <p className="mt-1 max-w-2xl text-sm text-gray-400">
+              Add a perfume house here before attaching it to a new product.
+            </p>
+          </div>
 
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4 px-6 py-6 md:flex-row md:items-end">
+            <div className="flex-1">
+              <label
+                htmlFor="brand-name"
+                className="mb-2 block text-sm font-medium text-gray-200"
+              >
+                Brand name
+              </label>
+              <input
+                id="brand-name"
+                onChange={(e) => setBrand(e.target.value)}
+                type="text"
+                value={brand}
+                placeholder="Maison Francis Kurkdjian"
+                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
+              />
+            </div>
+
+            <button
+              onClick={craeteBrandHandler}
+              className="rounded-2xl bg-gradient-to-r from-amber-300 to-rose-300 px-5 py-3 font-semibold text-slate-950 transition hover:brightness-105 focus:outline-none focus:ring-4 focus:ring-amber-200/20"
+            >
+              Create Brand
+            </button>
+          </div>
+        </section>
+
+        <div className="flex items-center justify-center">
+          <section className="w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-[0_20px_70px_rgba(0,0,0,0.45)] backdrop-blur">
+            <div className="border-b border-white/10 bg-gradient-to-r from-amber-400/10 via-transparent to-rose-400/10 px-6 py-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200/80">
+                Catalog
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">
+                Create Perfume
+              </h2>
+              <p className="mt-1 max-w-2xl text-sm text-gray-400">
+                Add the core perfume details, then configure the available
+                bottle sizes and pricing.
+              </p>
+            </div>
+
+            <div className="space-y-5 px-6 py-6">
             {/* NAME */}
 
             <input
@@ -105,7 +143,7 @@ function Page() {
               name="name"
               type="text"
               placeholder="Perfume Name"
-              className="w-full p-3 rounded-xl bg-[#10141c] border border-[#262b36] focus:outline-none"
+              className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
             />
 
             {/* DESCRIPTION */}
@@ -114,7 +152,7 @@ function Page() {
               onChange={formHandler}
               name="description"
               placeholder="Perfume Description"
-              className="w-full p-3 rounded-xl bg-[#10141c] border border-[#262b36] h-24 resize-none"
+              className="h-28 w-full resize-none rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
             />
 
             {/* BRAND */}
@@ -122,7 +160,7 @@ function Page() {
             <select
               onClick={formHandler}
               name="brandId"
-              className="w-full p-3 rounded-xl bg-[#10141c] border border-[#262b36]"
+              className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none transition focus:border-amber-300/70 focus:bg-black/30 focus:ring-4 focus:ring-amber-300/10"
             >
               {brands?.getAllBrands.map((b) => (
                 <option key={b.id} value={b.id}>
@@ -133,18 +171,27 @@ function Page() {
 
             {/* VARIANTS */}
 
-            <div className="border border-[#262b36] rounded-xl p-4">
-              <h3 className="text-sm text-gray-400 mb-3">Variants</h3>
+            <div className="rounded-3xl border border-white/10 bg-black/10 p-5">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-100/80">
+                    Variants
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-400">
+                    Configure size, concentration, and price.
+                  </p>
+                </div>
+              </div>
 
               <div className="space-y-4">
                 {/* 50 ml */}
 
-                <div className="flex items-center gap-3">
+                <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
                   <input type="checkbox" className="accent-blue-500" />
 
-                  <span className="w-16">50 ml</span>
+                  <span className="text-sm font-medium text-gray-200">50 ml</span>
 
-                  <select className="p-2 rounded-lg bg-[#10141c] border border-[#262b36]">
+                  <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
                     <option>EDT</option>
 
                     <option>EDP</option>
@@ -155,18 +202,20 @@ function Page() {
                   <input
                     type="number"
                     placeholder="Price"
-                    className="w-24 p-2 rounded-lg bg-[#10141c] border border-[#262b36]"
+                    className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
                   />
                 </div>
 
                 {/* 100 ml */}
 
-                <div className="flex items-center gap-3">
+                <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
                   <input type="checkbox" className="accent-blue-500" />
 
-                  <span className="w-16">100 ml</span>
+                  <span className="text-sm font-medium text-gray-200">
+                    100 ml
+                  </span>
 
-                  <select className="p-2 rounded-lg bg-[#10141c] border border-[#262b36]">
+                  <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
                     <option>EDT</option>
 
                     <option>EDP</option>
@@ -177,18 +226,20 @@ function Page() {
                   <input
                     type="number"
                     placeholder="Price"
-                    className="w-24 p-2 rounded-lg bg-[#10141c] border border-[#262b36]"
+                    className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
                   />
                 </div>
 
                 {/* 150 ml */}
 
-                <div className="flex items-center gap-3">
+                <div className="grid gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:grid-cols-[auto_90px_1fr_120px] md:items-center">
                   <input type="checkbox" className="accent-blue-500" />
 
-                  <span className="w-16">150 ml</span>
+                  <span className="text-sm font-medium text-gray-200">
+                    150 ml
+                  </span>
 
-                  <select className="p-2 rounded-lg bg-[#10141c] border border-[#262b36]">
+                  <select className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-white outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10">
                     <option>EDT</option>
 
                     <option>EDP</option>
@@ -199,7 +250,7 @@ function Page() {
                   <input
                     type="number"
                     placeholder="Price"
-                    className="w-24 p-2 rounded-lg bg-[#10141c] border border-[#262b36]"
+                    className="w-full rounded-xl border border-white/10 bg-black/20 p-2.5 text-white placeholder:text-gray-500 outline-none transition focus:border-amber-300/70 focus:ring-4 focus:ring-amber-300/10"
                   />
                 </div>
               </div>
@@ -209,12 +260,13 @@ function Page() {
 
             <button
               onClick={createPerfumeHandler}
-              className="w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-xl font-medium"
+              className="w-full rounded-2xl bg-gradient-to-r from-amber-300 to-rose-300 p-3.5 font-semibold text-slate-950 transition hover:brightness-105 focus:outline-none focus:ring-4 focus:ring-amber-200/20"
             >
               Create Perfume
             </button>
           </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
   );
